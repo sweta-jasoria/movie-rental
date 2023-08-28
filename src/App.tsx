@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
+import {Route, Routes, Navigate} from 'react-router-dom';
+import {AppContextProvider} from './context/AppContext';
+import Navbar from './components/Navbar';
+import Login from './components/Login';
+import Register from './components/Register';
+import Logout from './components/Logout';
+import Movies from './components/Movies';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <React.Fragment>
+      <AppContextProvider>
+          <Navbar />
+
+          <Routes>
+              <Route path='/movies' element={<Movies />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/logout' element={<Logout />} />
+              <Route path='/' element={<Navigate replace to='/movies' />} />
+          </Routes>
+      </AppContextProvider>
+    </React.Fragment>
+  )
 }
 
 export default App;
